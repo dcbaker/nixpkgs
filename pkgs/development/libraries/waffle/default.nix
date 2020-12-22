@@ -9,6 +9,8 @@
 , wayland
 , libxcb
 , libX11
+, mesa
+, libudev
 }:
 
 stdenv.mkDerivation rec {
@@ -29,6 +31,8 @@ stdenv.mkDerivation rec {
     libX11
     libxcb
     wayland
+    mesa
+    libudev
   ];
 
   nativeBuildInputs = [
@@ -37,7 +41,7 @@ stdenv.mkDerivation rec {
     pkg-config
   ];
 
-  cmakeFlags = [ "-Dplatforms=x11,wayland" ];
+  cmakeFlags = [ "-Dplatforms=x11,wayland,gbm" ];
 
   postInstall = ''
     wrapProgram $out/bin/wflinfo \
